@@ -11,13 +11,17 @@ for Android devices.
 The Git repository is created in the root directory of a project
 created in Android Studio 1.0 using OpenJDK 1.7 on Ubuntu 14.04.
 
+Note: everything should still work with Oracle JDK, or on
+Macintosh or Windows systems, as long as the directory structure 
+stays the same.
+
 To open this project in Android Studio, clone the project files,
 choose File>Open Project, then navigate to folder that holds this 
 file and choose Open.
 
 All project files are included in the repo for the sake of smooth
-integration with Android Studio, if you are using other editors 
-then from this directory the code that matters is in:
+integration with Android Studio, but if you are using other
+editors, then from this directory the code that matters is in:
 
 	app/src/main/
 
