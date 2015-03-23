@@ -21,3 +21,9 @@ then from this directory the code that matters is in:
 
 	app/src/main/
 
+To immediately deploy the app as-is on an Android device, copy:
+
+	app/build/outputs/apk/app-debug.apk
+
+onto the device and install it with "Unknown Sources" enabled.
+This should be in Settings under Security or Developer Options.
