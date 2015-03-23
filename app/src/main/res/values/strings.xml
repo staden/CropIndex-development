@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Farm Log</string>
+
+    <string name="title_section0">Intro</string>
+    <string name="title_section1">Location Information</string>
+    <string name="title_section2">Weather Data</string>
+    <string name="title_section3">Crop Data</string>
+    <string name="title_section4">Field Data</string>
+    <string name="title_section5">Attachments</string>
+    <string name="title_section6">Guidelines</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Submit</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="preamble">The following data will be contributed to a database that will help estimate local agricultural potential and detect crop stress. This classification schema has been taken from the USDA\&apos;s system for monitoring agricultural conditions at a county level. Navigate the menu tabs to the left to enter data. Save a record by selecting SUBMIT. For information regarding the criteria listed within, please refer to the final Guidelines tab.</string>
+
+</resources>
