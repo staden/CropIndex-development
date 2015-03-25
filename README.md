@@ -15,7 +15,7 @@ consistent.
 
   * To immediately deploy the app as-is on an Android device, copy:
 
-	app/build/outputs/apk/app-debug.apk
+	`app/build/outputs/apk/app-debug.apk`
 
    onto the device and install it. Make sure "Unknown Sources" is
 enabled Settings under Security or Developer Options.
@@ -24,7 +24,7 @@ enabled Settings under Security or Developer Options.
 choose "Checkout from Version Control" > "Git", and for the Vcs
 Repository URL enter:
 
-	https://github.com/staden/FarmLog-development.git
+	`https://github.com/staden/FarmLog-development.git`
 
 Depending on how powerful your computer is, and if you have
 access to an Android device, you may opt not to use Android 
@@ -36,4 +36,4 @@ can be used instead of Android Studio.
 Regardless of what editor you use, the main source files are
 located in:
 
-	app/src/main/
+	`app/src/main/`
