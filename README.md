@@ -13,14 +13,14 @@ Everything should still work with Oracle JDK, or on Macintosh or
 Windows systems, as long as the directory structure stays 
 consistent.
 
-..* To immediately deploy the app as-is on an Android device, copy:
+  * To immediately deploy the app as-is on an Android device, copy:
 
 	app/build/outputs/apk/app-debug.apk
 
-...onto the device and install it. Make sure "Unknown Sources" is
+   onto the device and install it. Make sure "Unknown Sources" is
 enabled Settings under Security or Developer Options.
 
-..* To open this project in Android Studio, view the "VCS" menu and
+  * To open this project in Android Studio, view the "VCS" menu and
 choose "Checkout from Version Control" > "Git", and for the Vcs
 Repository URL enter:
 
