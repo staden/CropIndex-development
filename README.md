@@ -1,7 +1,8 @@
 # FarmLog-development
 
-## Notice: This project has a new repo!
-## `https://github.com/staden/CropIndex-development.git`
+## Notice: This project has a new repo! This one will no longer be maintained.
+
+## We have moved to: `https://github.com/staden/CropIndex-development.git`
 
 
 Hello!
