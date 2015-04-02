@@ -1,5 +1,8 @@
 # FarmLog-development
 
+## Notice: This project has a new repo!
+## `https://github.com/staden/CropIndex-development.git`
+
 
 Hello!
 
