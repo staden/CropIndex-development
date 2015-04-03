@@ -29,4 +29,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="property_id">Please identify the farm and/or owner</string>
+
 </resources>
