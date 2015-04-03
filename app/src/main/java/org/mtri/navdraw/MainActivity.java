@@ -1,6 +1,7 @@
 package org.mtri.navdraw;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -133,15 +134,45 @@ public class MainActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Fragment subFragment = null;
+        switch (item.getItemId()) {
+            case R.id.action_submit:
+                SubmitAction();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
+    private void SubmitAction() {
+        // update the main content by replacing fragments
+        Fragment subFragment = new fragment7();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, subFragment)
+                .commit();
+    }
+
+
+    /*
+    * Launch submission activity
+     */
+
+//    private void SubmitAction() {
+//        Intent i = new Intent(MainActivity.this, SubmitActivity.class);
+//        startActivity(i);
+//    }
+
+//        int id = item.getItemId();
+
+    //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+
+//        return super.onOptionsItemSelected(item);
+
+//    }
 
     /**
      * A placeholder fragment containing a simple view.
