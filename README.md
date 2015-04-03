@@ -1,4 +1,4 @@
-# FarmLog-development
+# CropIndex-development
 
 ## Notice: This project has a new repo! This one will no longer be maintained.
 
@@ -17,7 +17,7 @@ Everything should still work with Oracle JDK, or on Macintosh or Windows systems
 
   * To open this project in Android Studio, view the "VCS" menu and choose "Checkout from Version Control" > "Git", and for the "Vcs Repository URL" enter:
 
-	`https://github.com/staden/FarmLog-development.git`
+	`https://github.com/staden/CropIndex-development.git`
 
 Depending on how powerful your computer is, and if you have access to an Android device, you may opt not to use Android Studio. Android Studio is useful for emulation if no Android device is available, and alternatively, if an Android device is available for testing the app then more lightweight text editors can be used instead of Android Studio. 
 
