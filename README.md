@@ -1,10 +1,5 @@
 # CropIndex-development
 
-## Notice: This project has a new repo! This one will no longer be maintained.
-
-## We have moved to: `https://github.com/staden/CropIndex-development.git`
-
-
 Hello!
 
 Welcome to the source code of MTRI/IRI 's field data collection app for Android devices.

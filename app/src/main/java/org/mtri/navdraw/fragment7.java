@@ -14,7 +14,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        rootview = inflater.inflate(R.layout.fragment6_layout, container, false);
+        rootview = inflater.inflate(R.layout.fragment7_layout, container, false);
         return rootview;
     }
 

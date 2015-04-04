@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Farm Log</string>
+    <string name="app_name">CropIndex</string>
 
     <string name="title_section0">Intro</string>
     <string name="title_section1">Location Information</string>
