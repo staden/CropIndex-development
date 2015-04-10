@@ -1,5 +1,7 @@
 # CropIndex-development
 
+![app_logo.png](https://github.com/staden/FarmLog-development/blob/master/app/src/main/res/drawable/cropindex_logo_small.png)
+
 Hello!
 
 Welcome to the source code of MTRI/IRI 's field data collection app for Android devices.
@@ -9,3 +11,7 @@ Welcome to the source code of MTRI/IRI 's field data collection app for Android 
   * Main source files are located in `app/src/main/`
   
   * Use the [wiki](https://github.com/staden/CropIndex-development/wiki)!
+
+![iri_logo.png](https://github.com/staden/FarmLog-development/blob/master/app/src/main/res/drawable/iri_logo.png)
+
+![mtri_logo.png](https://github.com/staden/FarmLog-development/blob/master/app/src/main/res/drawable/mtri_logo.png)
