@@ -31,4 +31,11 @@
 
     <string name="property_id">Please identify the farm and/or owner</string>
 
+    <string name="show_location">Show Location</string>
+
+    <string name="date">Date: </string>
+    <string name="change_date">Change Date</string>
+
+
+
 </resources>

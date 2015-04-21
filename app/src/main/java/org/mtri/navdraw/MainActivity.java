@@ -2,6 +2,7 @@ package org.mtri.navdraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -157,8 +158,5 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, subFragment)
                 .commit();
     }
-
-
-
 
 }
