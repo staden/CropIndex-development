@@ -1,13 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_section3"
-        android:id="@+id/textView"
+        android:id="@+id/title_section3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/title_section3">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crop1_field_title"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/crop_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/crop1_button"
+                android:text="@string/crop1_button"/>
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/GridLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:text="@string/excellent" />
+
+                <TextView
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:text="@string/good" />
+
+                <TextView
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:text="@string/fair" />
+
+                <TextView
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:text="@string/poor"/>
+
+                <TextView
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:text="@string/vpoor"/>
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:id="@+id/crop1_excellent"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:id="@+id/crop1_good"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:id="@+id/crop1_fair"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:id="@+id/crop1_poor"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:id="@+id/crop1_vpoor"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <Button
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:id="@+id/record_c1_excellent"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:id="@+id/record_c1_good"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="2"
+                    android:layout_column="2"
+                    android:id="@+id/record_c1_fair"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="3"
+                    android:layout_column="2"
+                    android:id="@+id/record_c1_poor"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="4"
+                    android:layout_column="2"
+                    android:id="@+id/record_c1_vpoor"
+                    android:text="@string/record"/>
+
+            </GridLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
 </RelativeLayout>

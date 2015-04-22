@@ -86,6 +86,7 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, objFragment)
+                .addToBackStack(null)
                 .commit();
     }
 

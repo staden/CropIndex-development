@@ -30,11 +30,41 @@
     <string name="no">No</string>
 
     <string name="property_id">Please identify the farm and/or owner</string>
-
-    <string name="show_location">Show Location</string>
-
-    <string name="date">Date: </string>
+    <string name="show_location">Refresh Location</string>
+    <string name="date_field_title">Date: </string>
     <string name="change_date">Change Date</string>
+    <string name="location_field_title">Location:</string>
+    
+    <string name="temp_field_title">Temperature:</string>
+    <string name="button_editTemp">Record Temp</string>
+    <string name="rainfall_field_title">Rainfall:</string>
+    <string name="button_editRainfall">Record Rainfall</string>
+    
+    <string name="excellent">Excellent (&#37;)</string>
+    <string name="good">Good (&#37;)</string>
+    <string name="fair">Fair (&#37;)</string>
+    <string name="poor">Poor (&#37;)</string>
+    <string name="vpoor">Very Poor (&#37;)</string>
+    <string name="record">Enter Value</string>
+    <string name="percent_sign">(&#37;)</string>
+
+    <string name="crop1_field_title">Primary Crop:</string>
+    <string name="crop1_hint">enter primary crop</string>
+    <string name="crop1_button">Record Crop</string>
+    
+    <string name="soilmoisture_field_title">Soil Moisture:</string>
+    <string name="vvshort">Very Short (&#37;)</string>
+    <string name="vshort">Short (&#37;)</string>
+    <string name="adequate">Adequate (&#37;)</string>
+    <string name="surplus">Surplus (&#37;)</string>
+
+    <string name="select">Select</string>
+
+    <string name="humus_field_title">Soil Organic Content (Humus)</string>
+    
+    
+
+
 
 
 

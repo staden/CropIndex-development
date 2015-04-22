@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/owner"
         android:layout_gravity="center_horizontal"
         android:hint="@string/property_id" />
 
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date"/>
+        android:text="@string/date_field_title"/>
 
     <TextView
         android:id="@+id/displayDate"
@@ -43,6 +43,18 @@
         android:layout_height="wrap_content"
         android:text="@string/change_date"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location_field_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/displayLocation"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 
     <Button

@@ -6,12 +6,14 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     private int month;
     private int day;
 
+    private EditText owner;
+
     Button btnShowLocation;
     GPSTracker gps;
 
@@ -45,6 +49,7 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
 
         rootview = inflater.inflate(R.layout.fragment1_layout, container, false);
 
+        // Display current date (with a button that can change it)
         displayDate = (TextView) rootview.findViewById(R.id.displayDate);
         changeDate = (Button) rootview.findViewById(R.id.changeDate);
 
@@ -53,13 +58,12 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
 
-//        TextView displayDate = (TextView) rootview.findViewById(R.id.displayDate);
-
         displayDate.setText(new StringBuilder()
                 .append(month + 1).append(" - ")
                 .append(day).append(" - ")
                 .append(year).append(" "));
 
+        // Tie show_location button to GPSTracker
         btnShowLocation = (Button) rootview.findViewById(R.id.show_location);
 
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +170,33 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     public void onClick(View v) {
 
     }
+/*
+
+    @Override
+    public void onSaveInstanceState(Bundle outState_fragment1) {
+        super.onSaveInstanceState(outState_fragment1);
+
+        displayDate = (TextView) rootview.findViewById(R.id.displayDate);
+        owner = (EditText) rootview.findViewById(R.id.owner);
+
+        String date = displayDate.getText().toString();
+        String farmID = owner.getText().toString();
+
+        outState_fragment1.putString(date,farmID);
+
+//        FragmentManager manager = getFragmentManager();
+//        manager.putFragment(outState_fragment1, "outstate_fragment1", mMyFragment);
+
+        //outState_fragment1.putString(owner, displayDate);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+//            data = savedInstanceState.getString(date,farmID)
+        }
+    }
+*/
 
 
 }

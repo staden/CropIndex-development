@@ -1,13 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_section4"
-        android:id="@+id/textView"
+        android:id="@+id/title_section4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/title_section4">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/soilmoisture_field_title"
+                android:textStyle="bold"/>
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/GridLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="4"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:text="@string/surplus" />
+
+                <TextView
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:text="@string/adequate" />
+
+                <TextView
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:text="@string/vshort" />
+
+                <TextView
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:text="@string/vvshort"/>
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:id="@+id/soilmoisture_surplus"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:id="@+id/soilmoisture_adequate"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:id="@+id/soilmoisture_short"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:id="@+id/soilmoisture_veryshort"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <Button
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:id="@+id/record_sm_surplus"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:id="@+id/record_sm_adequate"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="2"
+                    android:layout_column="2"
+                    android:id="@+id/record_sm_short"
+                    android:text="@string/record"/>
+
+                <Button
+                    android:layout_row="3"
+                    android:layout_column="2"
+                    android:id="@+id/record_sm_veryshort"
+                    android:text="@string/record"/>
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/humus_field_title"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/displayHumus"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/record_humus"
+                android:text="@string/select"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </RelativeLayout>
