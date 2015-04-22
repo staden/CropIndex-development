@@ -18,14 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@id/textView"
-        >
+        android:layout_below="@id/textView">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/temp_field_title"
-            android:textStyle="bold"/>
+            android:text="@string/temperature_field_title"
+            android:textStyle="bold"
+            android:id="@+id/temperature_field_title"/>
 
         <TextView
             android:id="@+id/displayTemp"
@@ -35,7 +35,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <Button
-            android:id="@+id/button_editTemp"
+            android:id="@+id/record_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_editTemp"
@@ -45,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rainfall_field_title"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:id="@+id/rainfall_field_title"/>
 
         <TextView
             android:id="@+id/displayRainfall"
@@ -55,7 +56,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <Button
-            android:id="@+id/button_editRainfall"
+            android:id="@+id/record_rainfall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_editRainfall"

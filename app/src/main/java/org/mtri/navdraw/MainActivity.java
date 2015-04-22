@@ -1,6 +1,7 @@
 package org.mtri.navdraw;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -22,11 +23,93 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
+
+/*class GlobalVarsInit extends Application {
+
+    // Initialize date
+    final Calendar c = Calendar.getInstance();
+    int year = c.get(Calendar.YEAR);
+    int month = c.get(Calendar.MONTH);
+    int day = c.get(Calendar.DAY_OF_MONTH);
+
+    private StringBuilder sub_date = new StringBuilder()
+            .append(month + 1).append(" - ")
+            .append(day).append(" - ")
+            .append(year).append(" ");
+
+    private String sub_location;
+    private String sub_owner = "";
+    private String sub_temp;
+    private String sub_rainfall;
+    private String sub_crop1;
+    private String sub_crop1_excellent;
+    private String sub_crop1_good;
+    private String sub_crop1_fair;
+    private String sub_crop1_poor;
+    private String sub_crop1_vpoor;
+    private String sub_sm_surplus;
+    private String sub_sm_adequate;
+    private String sub_sm_short;
+    private String sub_sm_veryshort;
+
+
+
+    private String myState;
+
+    public String getState() {
+        return myState;
+    }
+    public void setState(String s) {
+        myState = s;
+    }
+
+    public StringBuilder getSub_date() {
+        return sub_date;
+    }
+}*/
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    // Initialize data
+    final Calendar c = Calendar.getInstance();
+    int year = c.get(Calendar.YEAR);
+    int month = c.get(Calendar.MONTH);
+    int day = c.get(Calendar.DAY_OF_MONTH);
 
+    double latitude = 0;
+    double longitude = 0;
+
+    String owner = "no owner identified";
+
+    String temperature = "null";
+    String rainfall = "0";
+
+    String crop_1 = "null";
+    Integer crop1_excellent = 0;
+    Integer crop1_good = 0;
+    Integer crop1_fair = 0;
+    Integer crop1_poor = 0;
+    Integer crop1_vpoor = 0;
+
+    String humus = "null";
+    Integer soilmoisture_surplus = 0;
+    Integer soilmoisture_adequate = 0;
+    Integer soilmoisture_short = 0;
+    Integer soilmoisture_veryshort = 0;
+
+
+
+/*
+    StringBuilder sub_date = new StringBuilder()
+            .append(month + 1).append(" - ")
+            .append(day).append(" - ")
+            .append(year).append(" ");
+*/
+
+    /*private TextView displayDate;*/
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -90,6 +173,7 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
+/*
     public void onSectionAttached(int number) {
         switch (number) {
             case 0:
@@ -115,6 +199,7 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
     }
+*/
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -157,6 +242,7 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, subFragment)
+                .addToBackStack(null)
                 .commit();
     }
 

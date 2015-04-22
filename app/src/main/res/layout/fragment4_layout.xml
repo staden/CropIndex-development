@@ -121,13 +121,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:id="@+id/displayHumus"/>
+                android:id="@+id/displayHumus"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-            <Button
-                android:layout_width="wrap_content"
+            <ScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/record_humus"
-                android:text="@string/select"/>
+                android:orientation="vertical"
+                android:layout_below="@id/displayHumus">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/record_humus_none"
+                    android:text="@string/none"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/record_humus_low"
+                    android:text="@string/low"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/record_humus_moderate"
+                    android:text="@string/moderate"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/record_humus_high"
+                    android:text="@string/high"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/record_humus_vhigh"
+                    android:text="@string/vhigh"/>
+
+            </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

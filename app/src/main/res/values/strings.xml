@@ -22,21 +22,31 @@
 
     <string name="confirm_submission">Are you sure you want to submit?</string>
 
-    <string name="preview">Preview?</string>
+    <string name="preview">Preview: </string>
 
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
 
-    <string name="property_id">Please identify the farm and/or owner</string>
+    <string name="property_id">Please identify the farm and/or owner:</string>
+    <string name="record_owner">ID Farm</string>
     <string name="show_location">Refresh Location</string>
     <string name="date_field_title">Date: </string>
     <string name="change_date">Change Date</string>
     <string name="location_field_title">Location:</string>
-    
-    <string name="temp_field_title">Temperature:</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+
+    <string name="temperature">Temperature</string>
+    <string name="temperature_field_title">Temperature:</string>
     <string name="button_editTemp">Record Temp</string>
+    <string name="rainfall">Rainfall</string>
     <string name="rainfall_field_title">Rainfall:</string>
     <string name="button_editRainfall">Record Rainfall</string>
     
@@ -49,6 +59,7 @@
     <string name="percent_sign">(&#37;)</string>
 
     <string name="crop1_field_title">Primary Crop:</string>
+    <string name="primary_crop">Primary Crop</string>
     <string name="crop1_hint">enter primary crop</string>
     <string name="crop1_button">Record Crop</string>
     
@@ -61,6 +72,14 @@
     <string name="select">Select</string>
 
     <string name="humus_field_title">Soil Organic Content (Humus)</string>
+    <string name="none">None</string>
+    <string name="low">Low</string>
+    <string name="moderate">Moderate</string>
+    <string name="high">High</string>
+    <string name="vhigh">Very High</string>
+
+
+
     
     
 

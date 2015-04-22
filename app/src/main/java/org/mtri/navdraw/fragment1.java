@@ -1,8 +1,11 @@
 package org.mtri.navdraw;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,24 +27,27 @@ import java.util.Calendar;
 
 /**
  * Created by sam on 3/23/15.
+ *
+ *  This fragment records updates to activityData.year
+ *                                               .month
+ *                                               .day
+ *                                               .latitude
+ *                                               .longitude
+ *                                               .owner
+ *
  */
 
 public class fragment1 extends android.support.v4.app.Fragment implements View.OnClickListener{
 
-
-
+    // get layout objects
+    private TextView displayOwner;
     private TextView displayDate;
-    private Button changeDate;
+    private TextView displayLocation;
 
-    private int year;
-    private int month;
-    private int day;
+    // get GPS Tracker for refresh button
+    private GPSTracker gps;
 
-    private EditText owner;
-
-    Button btnShowLocation;
-    GPSTracker gps;
-
+    // make a view for the fragment
     View rootview;
 
     @Nullable
@@ -49,22 +56,118 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
 
         rootview = inflater.inflate(R.layout.fragment1_layout, container, false);
 
-        // Display current date (with a button that can change it)
+        // get activityData
+        final MainActivity activityData = (MainActivity)getActivity();
+
+        // set layout objects
+        displayOwner = (TextView) rootview.findViewById(R.id.displayOwner);
         displayDate = (TextView) rootview.findViewById(R.id.displayDate);
+        Button changeDate = (Button) rootview.findViewById(R.id.changeDate);
+        displayLocation = (TextView) rootview.findViewById(R.id.displayLocation);
+
+        // display activityData
+        displayDate.setText(new StringBuilder()
+                .append(activityData.month + 1).append(" - ")
+                .append(activityData.day).append(" - ")
+                .append(activityData.year).append(" "));
+        displayOwner.setText(activityData.owner);
+        displayLocation.setText(new StringBuffer()
+                .append("lat: ").append(activityData.latitude)
+                .append(", lng: ").append(activityData.longitude));
+
+        // Tie record_owner button to picker dialog and activityData
+        Button btnIDFarm = (Button) rootview.findViewById(R.id.record_owner);
+
+        btnIDFarm.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onCreateDialog();
+            }
+
+            private Dialog onCreateDialog() {
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(getActivity());
+
+                final EditText input = new EditText(getActivity());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertdialog.setView(input);
+
+                alertdialog.setMessage(R.string.property_id)
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // cancel, go back
+                                dialog.cancel();
+                            }
+                        })
+                        .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (input.getText() != null) {
+                                    // update activityData.owner and displayOwner
+                                    activityData.owner = input.getText().toString();
+                                    displayOwner.setText(activityData.owner);
+                                } else {
+                                    dialog.cancel();
+                                }
+                            }
+                        });
+                alertdialog.show();
+                return alertdialog.create();
+            }
+        });
+
+        // Tie changeDate button to displayDate and activityData
         changeDate = (Button) rootview.findViewById(R.id.changeDate);
 
-        final Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
+        changeDate.setOnClickListener(new View.OnClickListener() {
 
-        displayDate.setText(new StringBuilder()
-                .append(month + 1).append(" - ")
-                .append(day).append(" - ")
-                .append(year).append(" "));
+            @Override
+            public void onClick(View v) {
+                onCreateDialog();
+            }
 
-        // Tie show_location button to GPSTracker
-        btnShowLocation = (Button) rootview.findViewById(R.id.show_location);
+            private Dialog onCreateDialog() {
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(getActivity());
+
+                final DatePicker input = new DatePicker(getActivity());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertdialog.setView(input);
+
+                alertdialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // cancel, go back
+                        dialog.cancel();
+                    }
+                })
+                        .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // update activityData.owner and displayOwner
+                                activityData.year = input.getYear();
+                                activityData.month = input.getMonth();
+                                activityData.day = input.getDayOfMonth();
+                                displayDate.setText(new StringBuilder()
+                                        .append(activityData.month + 1).append(" - ")
+                                        .append(activityData.day).append(" - ")
+                                        .append(activityData.year).append(" "));
+                            }
+                        });
+                alertdialog.show();
+                return alertdialog.create();
+            }
+        });
+
+
+        // Tie show_location button to GPSTracker and activityData
+        Button btnShowLocation = (Button) rootview.findViewById(R.id.show_location);
 
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -75,6 +178,13 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
                 if (gps.canGetLocation()) {
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
+
+                    activityData.latitude = latitude;
+                    activityData.longitude = longitude;
+
+                    displayLocation.setText(new StringBuilder()
+                            .append("Latitude: ").append(activityData.latitude)
+                            .append(", Longitude: ").append(activityData.longitude).append(" "));
 
                     Toast.makeText(
                             getActivity().getApplicationContext(),
@@ -88,117 +198,10 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
 
         return rootview;
     }
-
-
-    /*static final int DATE_PICKER_ID = 1111;*/
-
-/*    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        displayDate = (TextView) rootview.findViewById(R.id.displayDate);
-        changeDate = (Button) rootview.findViewById(R.id.changeDate);
-
-        final Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        day = c.get(Calendar.DAY_OF_MONTH);
-
-//        TextView displayDate = (TextView) rootview.findViewById(R.id.displayDate);
-
-        displayDate.setText(new StringBuilder()
-                .append(month + 1).append(" - ")
-                .append(day).append(" - ")
-                .append(year).append(" "));*/
-
-//        Button btnChangeDate = (Button) rootview.findViewById(R.id.changeDate);
-/*
-        btnChangeDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showDialog(DATE_PICKER_ID);
-
-            }
-        });
-    }
-
-
-  //  @Override
-    protected Dialog onCreateDialog(int id) {
-        switch(id) {
-        case DATE_PICKER_ID:
-                // open datepicker dialog
-                // set date picker for current date
-                // add pickerListener listener to date picker
-//                return new DatePickerDialog(this, pickerListener, year, month, day);
-        }
-        return null;
-    }
-*/
-
-/*
-    private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener() {
-
-        // when dialog is closed, below method will be called.
-        @Override
-        public void onDateSet(DatePicker view, int selectedYear,
-                              int selectedMonth, int selectedDay) {
-            year = selectedYear;
-            month = selectedMonth;
-            day = selectedDay;
-
-            // update displayDate
-            displayDate.setText(new StringBuilder()
-                    .append(month + 1).append(" - ")
-                    .append(day).append(" - ")
-                    .append(year).append(" "));
-        }
-    };
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        return dialog;
-    }
-*/
-
-
-
-
     @Override
     public void onClick(View v) {
 
     }
-/*
-
-    @Override
-    public void onSaveInstanceState(Bundle outState_fragment1) {
-        super.onSaveInstanceState(outState_fragment1);
-
-        displayDate = (TextView) rootview.findViewById(R.id.displayDate);
-        owner = (EditText) rootview.findViewById(R.id.owner);
-
-        String date = displayDate.getText().toString();
-        String farmID = owner.getText().toString();
-
-        outState_fragment1.putString(date,farmID);
-
-//        FragmentManager manager = getFragmentManager();
-//        manager.putFragment(outState_fragment1, "outstate_fragment1", mMyFragment);
-
-        //outState_fragment1.putString(owner, displayDate);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-//            data = savedInstanceState.getString(date,farmID)
-        }
-    }
-*/
-
-
 }
 
 

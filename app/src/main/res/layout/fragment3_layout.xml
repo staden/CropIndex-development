@@ -27,7 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/crop1_field_title"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:id="@+id/crop1_field_title"/>
 
             <TextView
                 android:id="@+id/crop_1"
@@ -39,7 +40,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/crop1_button"
+                android:id="@+id/record_crop1"
                 android:text="@string/crop1_button"/>
 
             <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
