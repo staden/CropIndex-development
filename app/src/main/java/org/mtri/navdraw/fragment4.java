@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 public class fragment4 extends android.support.v4.app.Fragment {
 
-    // set layout objects
+    // make layout objects
     private TextView soilmoisture_surplus;
     private TextView soilmoisture_adequate;
     private TextView soilmoisture_short;

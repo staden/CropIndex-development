@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
 import java.util.Calendar;
 
 
@@ -230,13 +231,13 @@ public class MainActivity extends ActionBarActivity
         Fragment subFragment = null;
         switch (item.getItemId()) {
             case R.id.action_submit:
-                SubmitAction();
+                PreviewAction();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void SubmitAction() {
+    private void PreviewAction() {
         // update the main content by replacing fragments
         Fragment subFragment = new fragment7();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -244,6 +245,6 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, subFragment)
                 .addToBackStack(null)
                 .commit();
-    }
+        }
 
 }
