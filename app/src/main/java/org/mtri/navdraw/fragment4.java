@@ -153,8 +153,8 @@ public class fragment4 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText() != null) {
-                                    activityData.soilmoisture_surplus = new Integer(input.getText().toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.soilmoisture_surplus = Integer.valueOf(input.getText().toString());
                                     soilmoisture_surplus.setText(activityData.soilmoisture_surplus.toString());
                                 } else {
                                     dialog.cancel();
@@ -198,8 +198,8 @@ public class fragment4 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText() != null) {
-                                    activityData.soilmoisture_adequate = new Integer(input.getText().toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.soilmoisture_adequate = Integer.valueOf(input.getText().toString());
                                     soilmoisture_adequate.setText(activityData.soilmoisture_adequate.toString());
                                 } else {
                                     dialog.cancel();
@@ -243,8 +243,8 @@ public class fragment4 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText() != null) {
-                                    activityData.soilmoisture_short = new Integer(input.getText().toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.soilmoisture_short = Integer.valueOf(input.getText().toString());
                                     soilmoisture_short.setText(activityData.soilmoisture_short.toString());
                                 } else {
                                     dialog.cancel();
@@ -288,8 +288,8 @@ public class fragment4 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText() != null) {
-                                    activityData.soilmoisture_veryshort= new Integer(input.getText().toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.soilmoisture_veryshort= Integer.valueOf(input.getText().toString());
                                     soilmoisture_veryshort.setText(activityData.soilmoisture_veryshort.toString());
                                 } else {
                                     dialog.cancel();

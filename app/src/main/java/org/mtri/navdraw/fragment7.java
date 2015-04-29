@@ -44,6 +44,29 @@ public class fragment7 extends android.support.v4.app.Fragment {
         // get activityData
         final MainActivity activityData = (MainActivity)getActivity();
 
+        // format CSV output
+        String csv_output = activityData.owner + "," +
+                activityData.year + "," +
+                activityData.month + "," +
+                activityData.day +  "," +
+                activityData.latitude +  "," +
+                activityData.longitude +  "," +
+                activityData.temperature +  "," +
+                activityData.rainfall +  "," +
+                activityData.crop_1 +  "," +
+                activityData.crop1_excellent + "," +
+                activityData.crop1_good +  "," +
+                activityData.crop1_fair +  "," +
+                activityData.crop1_poor +  "," +
+                activityData.crop1_vpoor +  "," +
+                activityData.humus +  "," +
+                activityData.soilmoisture_surplus + "," +
+                activityData.soilmoisture_adequate +  "," +
+                activityData.soilmoisture_short +  "," +
+                activityData.soilmoisture_veryshort + "," +
+                activityData.images + "," +
+                activityData.notes;
+
         // set layout objects
         TextView year = (TextView) rootview.findViewById(R.id.submit_year);
         TextView month = (TextView) rootview.findViewById(R.id.submit_month);
@@ -157,7 +180,13 @@ public class fragment7 extends android.support.v4.app.Fragment {
                         +activityData.year+"_"
                         +activityData.owner); // format email subject
                 i.putExtra(Intent.EXTRA_TEXT, s); // format email body
-                i.putExtra(Intent.ACTION_GET_CONTENT, myDir.toString()+"/test_output");
+
+                // attach file
+                Uri u1;
+                File file = new File("test_output");
+                u1 = Uri.fromFile(file);
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse(myDir.toString()+"test_output"));
+                //i.putExtra(Intent.ACTION_GET_CONTENT, myDir.toString()+"/test_output");
                 //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // TEST THIS!!
                 //Uri uri = Uri.fromFile(new File(myDir.toString()+"/test_output"));
                 //i.putExtra(Intent.EXTRA_STREAM, uri);

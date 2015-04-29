@@ -101,6 +101,9 @@ public class MainActivity extends ActionBarActivity
     Integer soilmoisture_short = 0;
     Integer soilmoisture_veryshort = 0;
 
+    String notes = null;
+    String images = null;
+
 
 
 /*

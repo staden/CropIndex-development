@@ -134,8 +134,10 @@ public class fragment3 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                activityData.crop1_excellent = new Integer(input.getText().toString());
-                                crop1_excellent.setText(activityData.crop1_excellent.toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.crop1_excellent = Integer.valueOf(input.getText().toString());
+                                    crop1_excellent.setText(activityData.crop1_excellent.toString());
+                                }
                             }
                         });
                 alertdialog.show();
@@ -175,8 +177,10 @@ public class fragment3 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                activityData.crop1_good= new Integer(input.getText().toString());
-                                crop1_good.setText(activityData.crop1_good.toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.crop1_good = Integer.valueOf(input.getText().toString());
+                                    crop1_good.setText(activityData.crop1_good.toString());
+                                }
                             }
                         });
                 alertdialog.show();
@@ -216,8 +220,8 @@ public class fragment3 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText() != null) {
-                                    activityData.crop1_fair = new Integer(input.getText().toString());
+                                if (input.getText().toString().length() != 0) {
+                                    activityData.crop1_fair = Integer.valueOf(input.getText().toString());
                                     crop1_fair.setText(activityData.crop1_fair.toString());
                                 } else {
                                     dialog.cancel();
@@ -229,7 +233,7 @@ public class fragment3 extends android.support.v4.app.Fragment {
             }
         });
 
-        // Tie record_c1_fair button to picker dialog and activityData.crop1_fair
+        // Tie record_c1_poor button to picker dialog and activityData.crop1_poor
         final Button record_c1_poor = (Button) rootview.findViewById(R.id.record_c1_poor);
         record_c1_poor.setOnClickListener(new View.OnClickListener() {
 
@@ -260,9 +264,9 @@ public class fragment3 extends android.support.v4.app.Fragment {
                         .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (input.getText() != null) {
+                                if (input.getText().toString().length() != 0) {
                                     // update activityData.owner and displayOwner
-                                    activityData.crop1_poor = new Integer(input.getText().toString());
+                                    activityData.crop1_poor = Integer.valueOf(input.getText().toString());
                                     crop1_poor.setText(activityData.crop1_poor.toString());
                                 } else {
                                     dialog.cancel();
@@ -305,9 +309,9 @@ public class fragment3 extends android.support.v4.app.Fragment {
                         .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (input.getText() != null) {
+                                if (input.getText().toString().length() != 0) {
                                     // update activityData.owner and displayOwner
-                                    activityData.crop1_vpoor = new Integer(input.getText().toString());
+                                    activityData.crop1_vpoor = Integer.valueOf(input.getText().toString());
                                     crop1_vpoor.setText(activityData.crop1_vpoor.toString());
                                 } else {
                                     dialog.cancel();
