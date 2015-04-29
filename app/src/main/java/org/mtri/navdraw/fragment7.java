@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.security.Timestamp;
 
 /**
@@ -45,7 +49,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
         final MainActivity activityData = (MainActivity)getActivity();
 
         // format CSV output
-        String csv_output = activityData.owner + "," +
+        final String csv_output = activityData.owner + "," +
                 activityData.year + "," +
                 activityData.month + "," +
                 activityData.day +  "," +
@@ -133,10 +137,39 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     e.printStackTrace();
                 }
                 String FILENAME = "test_output";
-                File myDir = getActivity().getFilesDir();
-                String s="";
+
+                // save data to EXTERNAL STORAGE
+                File myXDir = Environment.getExternalStorageDirectory();
+                File file = new File(myXDir + "/local_forms.csv");
+                if (!file.exists()) try {
+
+                        // create file with headers if local csv doesn't exist
+                        file.createNewFile();
+                        FileOutputStream os = new FileOutputStream(file,true);
+                        OutputStreamWriter out = new OutputStreamWriter(os);
+                        out.write(activityData.headers+"\n");
+                        out.close();
+                        /*FileWriter fout = new FileWriter(file.getName(),true);
+                        fout.write(activityData.headers+"\n");*/
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                if (file.exists()) try {
+
+                    // write new line to csv
+                    FileOutputStream fos = null;
+                    fos = new FileOutputStream(file, true);
+                    OutputStreamWriter out = new OutputStreamWriter(fos);
+                    out.write(csv_output+"\n");
+                    out.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
                 // save data to INTERNAL STORAGE
+                File myDir = getActivity().getFilesDir();
                 FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
                 String jsonStr = form_record.toString();
                 try {
@@ -151,6 +184,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                 }
 
                 // confirm save action
+                String s="";
                 try {
                     FileInputStream fileIn=getActivity().openFileInput("test_output");
                     InputStreamReader InputRead= new InputStreamReader(fileIn);
@@ -183,9 +217,10 @@ public class fragment7 extends android.support.v4.app.Fragment {
 
                 // attach file
                 Uri u1;
-                File file = new File("test_output");
-                u1 = Uri.fromFile(file);
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse(myDir.toString()+"test_output"));
+                File outgoing = new File("test_output");
+                u1 = Uri.fromFile(outgoing);
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:/"+myXDir+"/local_forms.csv"));
+                //i.putExtra(Intent.EXTRA_STREAM, Uri.parse(file.toString()+"test_output"));
                 //i.putExtra(Intent.ACTION_GET_CONTENT, myDir.toString()+"/test_output");
                 //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // TEST THIS!!
                 //Uri uri = Uri.fromFile(new File(myDir.toString()+"/test_output"));

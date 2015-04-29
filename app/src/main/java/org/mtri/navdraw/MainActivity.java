@@ -74,6 +74,28 @@ import java.util.Calendar;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    String headers = "FarmID," +
+            "year," +
+            "month," +
+            "day," +
+            "latitude," +
+            "longitude," +
+            "temperature," +
+            "rainfall," +
+            "primarycrop," +
+            "c1_excellent," +
+            "c1_good," +
+            "c1_fair," +
+            "c1_poor," +
+            "c1_vpoor," +
+            "humus," +
+            "sm_surplus," +
+            "sm_adequate," +
+            "sm_short," +
+            "sm_vshort," +
+            "images," +
+            "notes";
+
     // Initialize data
     final Calendar c = Calendar.getInstance();
     int year = c.get(Calendar.YEAR);

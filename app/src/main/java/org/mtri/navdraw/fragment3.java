@@ -134,7 +134,7 @@ public class fragment3 extends android.support.v4.app.Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // update activityData.owner and displayOwner
-                                if (input.getText().toString().length() != 0) {
+                                if (input.getText().length() != 0) {
                                     activityData.crop1_excellent = Integer.valueOf(input.getText().toString());
                                     crop1_excellent.setText(activityData.crop1_excellent.toString());
                                 }
