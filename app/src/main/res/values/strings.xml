@@ -20,7 +20,9 @@
     <string name="title_activity_submission">Submission</string>
     <string name="hello_world">Hello world!</string>
 
-    <string name="confirm_submission">Are you sure you want to submit?</string>
+    <string name="confirm_submission">How do you want to submit this data?</string>
+    <string name="email_submission">Email</string>
+    <string name="local_submission">SD card</string>
 
     <string name="preview">Preview: </string>
 

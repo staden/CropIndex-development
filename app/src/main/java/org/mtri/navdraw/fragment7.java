@@ -32,7 +32,8 @@ import java.security.Timestamp;
 /**
  * Created by sam on 3/23/15.
  *
- *  This fragment displays all data to be submitted.
+ *  This fragment displays all data to be submitted,
+ *      and provides options for how to submit.
  *
  */
 
@@ -113,46 +114,30 @@ public class fragment7 extends android.support.v4.app.Fragment {
         vshort.setText(String.valueOf(activityData.soilmoisture_short));
         vvshort.setText(String.valueOf(activityData.soilmoisture_veryshort));
 
-        // configure button to save data as CSV
-        Button btnSubmitData = (Button) rootview.findViewById(R.id.submit_data_button);
-        btnSubmitData.setOnClickListener(new View.OnClickListener() {
+        // configure button to save data as CSV to SD card
+        Button btnLocalData = (Button) rootview.findViewById(R.id.local_storage_button);
+        btnLocalData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    onSelected();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                onSelected();
             }
-            private void onSelected() throws FileNotFoundException {
-                /*JSONObject form_record = new JSONObject();
-                try {
-
-                    // output formatting
-                    form_record.put("id", activityData.owner);
-                    form_record.put("latitude", activityData.latitude);
-                    form_record.put("longitude", activityData.longitude);
-                    form_record.put("everything", activityData);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-
+            public void onSelected() {
 
                 // save data to EXTERNAL STORAGE
                 File myXDir = Environment.getExternalStorageDirectory();
                 File file = new File(myXDir + "/local_forms.csv");
                 if (!file.exists()) try {
 
-                        // create file with headers if local csv doesn't exist
-                        file.createNewFile();
-                        FileOutputStream os = new FileOutputStream(file,true);
-                        OutputStreamWriter out = new OutputStreamWriter(os);
-                        out.write(activityData.headers+"\n");
-                        out.close();
+                    // create file with headers if local csv doesn't exist
+                    file.createNewFile();
+                    FileOutputStream os = new FileOutputStream(file,true);
+                    OutputStreamWriter out = new OutputStreamWriter(os);
+                    out.write(activityData.headers+"\n");
+                    out.close();
                         /*FileWriter fout = new FileWriter(file.getName(),true);
                         fout.write(activityData.headers+"\n");*/
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 if (file.exists()) try {
 
@@ -163,10 +148,27 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     out.write(csv_output+"\n");
                     out.close();
 
+                    Toast.makeText(getActivity(), "Record added to local_forms.csv at " + myXDir.toString(), Toast.LENGTH_LONG).show();
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+            }
+        });
+
+        // configure button to email csv to mtri.fs.data@gmail.com
+        Button btnEmailData = (Button) rootview.findViewById(R.id.email_data_button);
+        btnEmailData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    onSelected();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            private void onSelected() throws FileNotFoundException {
 
                 // save data to INTERNAL STORAGE
                 String FILENAME = "single_record.csv";
@@ -201,7 +203,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                         s +=readstring;
                     }
                     InputRead.close();
-                    Toast.makeText(getActivity(), s + " saved to " + myDir.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), s + " saved to " + myDir.toString(), Toast.LENGTH_LONG).show();
 
                 } catch (Exception e) {
                     e.printStackTrace();
