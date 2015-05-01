@@ -113,7 +113,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
         vshort.setText(String.valueOf(activityData.soilmoisture_short));
         vvshort.setText(String.valueOf(activityData.soilmoisture_veryshort));
 
-        // configure button to save data as CSV/JSON?
+        // configure button to save data as CSV
         Button btnSubmitData = (Button) rootview.findViewById(R.id.submit_data_button);
         btnSubmitData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +125,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                 }
             }
             private void onSelected() throws FileNotFoundException {
-                JSONObject form_record = new JSONObject();
+                /*JSONObject form_record = new JSONObject();
                 try {
 
                     // output formatting
@@ -135,8 +135,8 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     form_record.put("everything", activityData);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-                String FILENAME = "test_output";
+                }*/
+
 
                 // save data to EXTERNAL STORAGE
                 File myXDir = Environment.getExternalStorageDirectory();
@@ -169,11 +169,13 @@ public class fragment7 extends android.support.v4.app.Fragment {
 
 
                 // save data to INTERNAL STORAGE
+                String FILENAME = "single_record.csv";
                 File myDir = getActivity().getFilesDir();
                 FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                String jsonStr = form_record.toString();
+                //String jsonStr = form_record.toString();
+                String csvStr = activityData.headers+"\n"+csv_output+"\n";
                 try {
-                    fos.write(jsonStr.getBytes());
+                    fos.write(csvStr.getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -186,7 +188,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                 // confirm save action
                 String s="";
                 try {
-                    FileInputStream fileIn=getActivity().openFileInput("test_output");
+                    FileInputStream fileIn=getActivity().openFileInput("single_record.csv");
                     InputStreamReader InputRead= new InputStreamReader(fileIn);
 
                     char[] inputBuffer= new char[16];
@@ -199,7 +201,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                         s +=readstring;
                     }
                     InputRead.close();
-                    Toast.makeText(getActivity(), s + " saved to " + myDir.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), s + " saved to " + myDir.toString(), Toast.LENGTH_LONG).show();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -213,13 +215,13 @@ public class fragment7 extends android.support.v4.app.Fragment {
                         +activityData.day+"_"
                         +activityData.year+"_"
                         +activityData.owner); // format email subject
-                i.putExtra(Intent.EXTRA_TEXT, s); // format email body
+                i.putExtra(Intent.EXTRA_TEXT, csvStr); // format email body
 
                 // attach file
-                Uri u1;
+                /*Uri u1;
                 File outgoing = new File("test_output");
-                u1 = Uri.fromFile(outgoing);
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:/"+myXDir+"/local_forms.csv"));
+                u1 = Uri.fromFile(outgoing);*/
+                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("single_record.csv"));
                 //i.putExtra(Intent.EXTRA_STREAM, Uri.parse(file.toString()+"test_output"));
                 //i.putExtra(Intent.ACTION_GET_CONTENT, myDir.toString()+"/test_output");
                 //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // TEST THIS!!
