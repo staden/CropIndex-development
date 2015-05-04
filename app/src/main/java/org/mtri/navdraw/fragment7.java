@@ -92,6 +92,8 @@ public class fragment7 extends android.support.v4.app.Fragment {
         TextView adequate = (TextView) rootview.findViewById(R.id.submit_sm_adequate);
         TextView vshort = (TextView) rootview.findViewById(R.id.submit_sm_short);
         TextView vvshort = (TextView) rootview.findViewById(R.id.submit_sm_vshort);
+        TextView images = (TextView) rootview.findViewById(R.id.submit_images);
+        TextView notes = (TextView) rootview.findViewById(R.id.submit_notes);
 
         // display activityData
         year.setText(String.valueOf(activityData.year));
@@ -113,6 +115,8 @@ public class fragment7 extends android.support.v4.app.Fragment {
         adequate.setText(String.valueOf(activityData.soilmoisture_adequate));
         vshort.setText(String.valueOf(activityData.soilmoisture_short));
         vvshort.setText(String.valueOf(activityData.soilmoisture_veryshort));
+        images.setText(String.valueOf(activityData.images));
+        notes.setText(String.valueOf(activityData.notes));
 
         // configure button to save data as CSV to SD card
         Button btnLocalData = (Button) rootview.findViewById(R.id.local_storage_button);

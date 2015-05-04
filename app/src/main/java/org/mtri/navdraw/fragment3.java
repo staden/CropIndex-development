@@ -65,7 +65,6 @@ public class fragment3 extends android.support.v4.app.Fragment {
         // Tie record_crop1 button to picker dialog and activityData.crop_1
         Button record_crop1 = (Button) rootview.findViewById(R.id.record_crop1);
         record_crop1.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 OnCreateDialog();

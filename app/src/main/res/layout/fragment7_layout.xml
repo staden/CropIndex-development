@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
-                android:rowCount="19"
+                android:rowCount="21"
                 android:orientation="vertical">
 
                 <TextView
@@ -151,6 +151,16 @@
                     android:layout_column="0"
                     android:textStyle="bold"
                     android:text="@string/vvshort"/>
+                <TextView
+                    android:layout_row="19"
+                    android:layout_column="0"
+                    android:textStyle="bold"
+                    android:text="@string/images"/>
+                <TextView
+                    android:layout_row="20"
+                    android:layout_column="0"
+                    android:textStyle="bold"
+                    android:text="@string/notes"/>
 
                 <TextView
                     android:layout_row="0"
@@ -246,6 +256,16 @@
                     android:layout_row="18"
                     android:layout_column="1"
                     android:id="@+id/submit_sm_vshort"
+                    android:text=""/>
+                <TextView
+                    android:layout_row="19"
+                    android:layout_column="1"
+                    android:id="@+id/submit_images"
+                    android:text=""/>
+                <TextView
+                    android:layout_row="20"
+                    android:layout_column="1"
+                    android:id="@+id/submit_notes"
                     android:text=""/>
 
 
