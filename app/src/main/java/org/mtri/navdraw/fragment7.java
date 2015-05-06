@@ -1,7 +1,5 @@
 package org.mtri.navdraw;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,20 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.security.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -37,8 +26,6 @@ import java.util.ArrayList;
  *  and provides options for how to submit.
  *
  */
-
-
 public class fragment7 extends android.support.v4.app.Fragment {
 
     View rootview;

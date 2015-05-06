@@ -17,14 +17,13 @@ import android.widget.TextView;
 /**
  * Created by sam on 3/23/15.
  *
- *  This class records updates to activityData.crop1
- *                                               .crop1_excellent
- *                                               .crop1_good
- *                                               .crop1_fair
- *                                               .crop1_poor
- *                                               .crop1_vpoor
+ *  This class records updates to activityData.humus
+ *                                               .soilmoisture_surplus
+ *                                               .soilmoisture_adequate
+ *                                               .soilmoisture_short
+ *                                               .soilmoisture_vshort
  *
- *  This class also inflates and updates objects displayed in fragment1_layout.xml
+ *  This class also inflates and updates objects displayed in fragment4_layout.xml
  *
  */
 
