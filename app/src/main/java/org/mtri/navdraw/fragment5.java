@@ -39,8 +39,6 @@ import java.util.Date;
  */
 public class fragment5 extends android.support.v4.app.Fragment {
 
-
-
     // set layout objects
     private ImageView display_image;
     private TextView notes;
@@ -106,15 +104,55 @@ public class fragment5 extends android.support.v4.app.Fragment {
             }
         });
 
+        // tie delete_image_btn to activityData.images
+        Button delete_image_btn = (Button) rootview.findViewById(R.id.delete_image_btn);
+        delete_image_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnCreateDialog();
+            }
+
+            private Dialog OnCreateDialog() {
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(getActivity());
+
+                final EditText input = new EditText(getActivity());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertdialog.setView(input);
+
+                alertdialog.setMessage(R.string.image_path)
+                        .setNegativeButton(R.string.clear, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                activityData.images = "";
+                                image_paths.setText(activityData.images);
+                                display_image.setImageBitmap(null);
+                            }
+                        })
+                        .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // update activityData.owner and displayOwner
+                                activityData.images = input.getText().toString();
+                                image_paths.setText(activityData.images);
+                                File image_file = new File(Environment.getExternalStorageDirectory(),activityData.images);
+                                Bitmap bp = BitmapFactory.decodeFile(image_file.getAbsolutePath());
+                                display_image.setImageBitmap(bp);
+                            }
+                        });
+                alertdialog.show();
+                return alertdialog.create();
+            }
+        });
+
         // tie launch_camera_btn to camera
         Button launch_camera_btn = (Button) rootview.findViewById(R.id.launch_camera_btn);
         launch_camera_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchCamera();
-                /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra("data", activityData.csv_output);
-                startActivityForResult(intent, 0);*/
             }
         });
 
@@ -130,51 +168,39 @@ public class fragment5 extends android.support.v4.app.Fragment {
     }
 
     /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     *  Save new image; update fragment5 objects and activityData
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            super.onActivityResult(requestCode, resultCode, data);
 
-        Uri new_image = data.getData();
-        Bitmap bp = (Bitmap) data.getExtras().get("data");
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String new_image_filename = "CI_image"+timeStamp+".jpg";
+            Bitmap bp = (Bitmap) data.getExtras().get("data");
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String new_image_filename = "CI_image" + timeStamp + ".jpg";
 
-        File storageDir = Environment.getExternalStorageDirectory();
-        File file = new File(storageDir+"/"+new_image_filename);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            Toast.makeText(getActivity(), new_image_filename+" saved to " + storageDir.toString(), Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), "image not saved", Toast.LENGTH_LONG).show();
+            File storageDir = Environment.getExternalStorageDirectory();
+            File file = new File(storageDir + "/" + new_image_filename);
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                bp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                Toast.makeText(getActivity(), new_image_filename + " saved to " + storageDir.toString(), Toast.LENGTH_LONG).show();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), "image not saved", Toast.LENGTH_LONG).show();
+            }
+
+            // update fragment5 objects
+            image_paths.setText(new_image_filename);
+            display_image.setImageBitmap(bp);
+
+            // get activityData
+            final MainActivity activityData = (MainActivity) getActivity();
+            // update activityData.images if images were selected
+            if (image_paths.getText() != null) {
+                activityData.images = image_paths.getText().toString();
+            }
         }
-/*
-        // get shared preferences for storing picture URI
-        SharedPreferences pictures = getActivity().getPreferences(Context.MODE_PRIVATE);
-
-        // add new picture to shared preferences
-        SharedPreferences.Editor editor = pictures.edit();
-        editor.putString(new_image_filename,new_image.toString());
-        editor.commit();*/
-
-        // update fragment5 objects
-        image_paths.setText(new_image_filename);
-        display_image.setImageBitmap(bp);
-
-
-        // get activityData
-        final MainActivity activityData = (MainActivity)getActivity();
-        // update activityData.images if images were selected
-        if (image_paths.getText() != null) {
-            activityData.images = image_paths.getText().toString();
-        }
-
 
     }
 

@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * Created by sam on 3/23/15.
  *
  *  This fragment displays all data to be submitted,
- *      and provides options for how to submit.
+ *  and provides options for how to submit.
  *
  */
 

@@ -85,9 +85,11 @@
 
     <string name="add_notes">Add/Edit Notes</string>
     <string name="launch_camera">Launch Camera</string>
-    <string name="add_image">Add Image</string>
+    <string name="delete_image">Edit/Delete Image</string>
 
     <string name="display_image">Display Image</string>
+    <string name="clear">Clear</string>
+    <string name="image_path">Enter path to image:</string>
 
 
 
