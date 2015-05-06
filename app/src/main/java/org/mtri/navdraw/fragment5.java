@@ -33,8 +33,10 @@ import java.util.Date;
 /**
  * Created by sam on 3/23/15.
  *
- *  This fragment records updates to activityData.notes
+ *  This class records updates to activityData.notes
  *                                               .images
+ *
+ *  This class also inflates and updates objects displayed in fragment5_layout.xml
  *
  */
 public class fragment5 extends android.support.v4.app.Fragment {

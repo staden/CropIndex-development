@@ -26,17 +26,17 @@ import org.w3c.dom.Text;
 import java.util.Calendar;
 
 /**
- * Created by sam on 3/23/15.
  *
- *  This fragment records updates to activityData.year
- *                                               .month
- *                                               .day
- *                                               .latitude
- *                                               .longitude
- *                                               .owner
+ *  This class records updates to activityData.year
+ *                                            .month
+ *                                            .day
+ *                                            .latitude
+ *                                            .longitude
+ *                                            .owner
+ *
+ *  This class also inflates and updates objects displayed in fragment1_layout.xml
  *
  */
-
 public class fragment1 extends android.support.v4.app.Fragment implements View.OnClickListener{
 
     // get layout objects

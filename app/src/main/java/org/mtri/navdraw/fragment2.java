@@ -17,8 +17,10 @@ import android.widget.TextView;
 /**
  * Created by sam on 3/23/15.
  *
- *  This fragment records updates to activityData.rainfall
+ *  This class records updates to activityData.rainfall
  *                                               .temperature
+ *
+ *  This class also inflates and updates objects displayed in fragment2_layout.xml
  *
  */
 

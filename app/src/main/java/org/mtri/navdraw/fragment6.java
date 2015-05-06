@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by sam on 3/23/15.
+ *  This class inflates fragment6_layout.xml
+ *
+ *
  */
 public class fragment6 extends android.support.v4.app.Fragment {
     View rootview;

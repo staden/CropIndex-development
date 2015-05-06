@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * Created by sam on 3/23/15.
+ *
+ *  This class inflates fragment0_layout.xml and
+ *  controls a button that restores the form to its initial state.
+ *
  */
 public class fragment0 extends android.support.v4.app.Fragment {
     View rootview;

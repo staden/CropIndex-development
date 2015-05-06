@@ -27,6 +27,12 @@ import android.widget.Toast;
 import java.io.FileOutputStream;
 import java.util.Calendar;
 
+/**
+ *
+ *  This class holds the "global" variables that the app is designed to collect, and controls
+ *  navigation between views.
+ *
+ */
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -83,28 +89,6 @@ public class MainActivity extends ActionBarActivity
 
     String notes = null;
     String images = null;
-
-    final String csv_output = owner + "," +
-            year + "," +
-            month + "," +
-            day +  "," +
-            latitude +  "," +
-            longitude +  "," +
-            temperature +  "," +
-            rainfall +  "," +
-            crop_1 +  "," +
-            crop1_excellent + "," +
-            crop1_good +  "," +
-            crop1_fair +  "," +
-            crop1_poor +  "," +
-            crop1_vpoor +  "," +
-            humus +  "," +
-            soilmoisture_surplus + "," +
-            soilmoisture_adequate +  "," +
-            soilmoisture_short +  "," +
-            soilmoisture_veryshort + "," +
-            images + "," +
-            notes;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
