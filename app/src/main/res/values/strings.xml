@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CropIndex</string>
 
-    <string name="title_section0">Intro</string>
+    <string name="title_section0">Overview</string>
     <string name="title_section1">Location Information</string>
     <string name="title_section2">Weather Data</string>
     <string name="title_section3">Crop Data</string>
@@ -90,6 +90,8 @@
     <string name="display_image">Display Image</string>
     <string name="clear">Clear</string>
     <string name="image_path">Enter path to image:</string>
+
+    <string name="reset">Reset Form</string>
 
 
 
