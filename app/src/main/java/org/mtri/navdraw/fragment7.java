@@ -173,8 +173,8 @@ public class fragment7 extends android.support.v4.app.Fragment {
             }
             private void onSelected() throws FileNotFoundException {
 
-                // save data to INTERNAL STORAGE
-                File myDir = getActivity().getFilesDir();
+                // save data to EXTERNAL STORAGE
+                File myDir = Environment.getExternalStorageDirectory();
                 String FILENAME = myDir+"/single_record.csv";
                 //FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
                 FileOutputStream fos = new FileOutputStream(FILENAME);
@@ -201,7 +201,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
                 i.putExtra(Intent.EXTRA_TEXT, csvStr); // format email body
 
                 // add single_record.csv and image
-                String[] filePaths = new String[] {"single_record.csv",
+                String[] filePaths = new String[] {FILENAME,
                         Environment.getExternalStorageDirectory()+"/"+activityData.images};
                 ArrayList<Uri> uris = new ArrayList<Uri>();
                 for (String file : filePaths)
