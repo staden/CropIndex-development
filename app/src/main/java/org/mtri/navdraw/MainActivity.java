@@ -3,6 +3,7 @@ package org.mtri.navdraw;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -25,51 +26,6 @@ import android.widget.Toast;
 
 import java.io.FileOutputStream;
 import java.util.Calendar;
-
-
-/*class GlobalVarsInit extends Application {
-
-    // Initialize date
-    final Calendar c = Calendar.getInstance();
-    int year = c.get(Calendar.YEAR);
-    int month = c.get(Calendar.MONTH);
-    int day = c.get(Calendar.DAY_OF_MONTH);
-
-    private StringBuilder sub_date = new StringBuilder()
-            .append(month + 1).append(" - ")
-            .append(day).append(" - ")
-            .append(year).append(" ");
-
-    private String sub_location;
-    private String sub_owner = "";
-    private String sub_temp;
-    private String sub_rainfall;
-    private String sub_crop1;
-    private String sub_crop1_excellent;
-    private String sub_crop1_good;
-    private String sub_crop1_fair;
-    private String sub_crop1_poor;
-    private String sub_crop1_vpoor;
-    private String sub_sm_surplus;
-    private String sub_sm_adequate;
-    private String sub_sm_short;
-    private String sub_sm_veryshort;
-
-
-
-    private String myState;
-
-    public String getState() {
-        return myState;
-    }
-    public void setState(String s) {
-        myState = s;
-    }
-
-    public StringBuilder getSub_date() {
-        return sub_date;
-    }
-}*/
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -95,6 +51,8 @@ public class MainActivity extends ActionBarActivity
             "sm_vshort," +
             "images," +
             "notes";
+
+
 
     // Initialize data
     final Calendar c = Calendar.getInstance();
@@ -126,16 +84,27 @@ public class MainActivity extends ActionBarActivity
     String notes = null;
     String images = null;
 
-
-
-/*
-    StringBuilder sub_date = new StringBuilder()
-            .append(month + 1).append(" - ")
-            .append(day).append(" - ")
-            .append(year).append(" ");
-*/
-
-    /*private TextView displayDate;*/
+    final String csv_output = owner + "," +
+            year + "," +
+            month + "," +
+            day +  "," +
+            latitude +  "," +
+            longitude +  "," +
+            temperature +  "," +
+            rainfall +  "," +
+            crop_1 +  "," +
+            crop1_excellent + "," +
+            crop1_good +  "," +
+            crop1_fair +  "," +
+            crop1_poor +  "," +
+            crop1_vpoor +  "," +
+            humus +  "," +
+            soilmoisture_surplus + "," +
+            soilmoisture_adequate +  "," +
+            soilmoisture_short +  "," +
+            soilmoisture_veryshort + "," +
+            images + "," +
+            notes;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -199,34 +168,6 @@ public class MainActivity extends ActionBarActivity
                 .commit();
     }
 
-/*
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 0:
-                mTitle = getString(R.string.title_section0);
-                break;
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_section4);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_section5);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_section6);
-                break;
-        }
-    }
-*/
-
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -270,6 +211,6 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, subFragment)
                 .addToBackStack(null)
                 .commit();
-        }
+    }
 
 }

@@ -85,7 +85,11 @@
 
     <string name="add_notes">Add/Edit Notes</string>
     <string name="launch_camera">Launch Camera</string>
-    <string name="add_image">Attach Image</string>
+    <string name="add_image">Add Image</string>
+
+    <string name="display_image">Display Image</string>
+
+
 
 
 

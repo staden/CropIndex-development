@@ -14,7 +14,11 @@ import android.app.Service;
 
 /**
  * Created by sam on 4/9/15.
+ *
+ *      based on a tutorial on http://www.javaexperience.com/
+ *
  */
+
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context context;

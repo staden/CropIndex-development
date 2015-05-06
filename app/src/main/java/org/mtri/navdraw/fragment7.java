@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.Timestamp;
+import java.util.ArrayList;
 
 /**
  * Created by sam on 3/23/15.
@@ -138,8 +139,6 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     OutputStreamWriter out = new OutputStreamWriter(os);
                     out.write(activityData.headers+"\n");
                     out.close();
-                        /*FileWriter fout = new FileWriter(file.getName(),true);
-                        fout.write(activityData.headers+"\n");*/
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -175,10 +174,10 @@ public class fragment7 extends android.support.v4.app.Fragment {
             private void onSelected() throws FileNotFoundException {
 
                 // save data to INTERNAL STORAGE
-                String FILENAME = "single_record.csv";
                 File myDir = getActivity().getFilesDir();
-                FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                //String jsonStr = form_record.toString();
+                String FILENAME = myDir+"/single_record.csv";
+                //FileOutputStream fos = getActivity().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+                FileOutputStream fos = new FileOutputStream(FILENAME);
                 String csvStr = activityData.headers+"\n"+csv_output+"\n";
                 try {
                     fos.write(csvStr.getBytes());
@@ -191,30 +190,8 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     e.printStackTrace();
                 }
 
-                // confirm save action
-                String s="";
-                try {
-                    FileInputStream fileIn=getActivity().openFileInput("single_record.csv");
-                    InputStreamReader InputRead= new InputStreamReader(fileIn);
-
-                    char[] inputBuffer= new char[16];
-
-                    int charRead;
-
-                    while ((charRead=InputRead.read(inputBuffer))>0) {
-                        // char to string conversion
-                        String readstring=String.copyValueOf(inputBuffer,0,charRead);
-                        s +=readstring;
-                    }
-                    InputRead.close();
-                    //Toast.makeText(getActivity(), s + " saved to " + myDir.toString(), Toast.LENGTH_LONG).show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
                 // email activityData to mtri.fs.data@gmail.com
-                Intent i = new Intent(Intent.ACTION_SEND);
+                Intent i = new Intent(Intent.ACTION_SEND_MULTIPLE);
                 i.setType("message/rfc822");
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{"mtri.fs.data@gmail.com"});
                 i.putExtra(Intent.EXTRA_SUBJECT, activityData.month+"_"
@@ -223,21 +200,18 @@ public class fragment7 extends android.support.v4.app.Fragment {
                         +activityData.owner); // format email subject
                 i.putExtra(Intent.EXTRA_TEXT, csvStr); // format email body
 
-                // attach file
-                /*Uri u1;
-                File outgoing = new File("test_output");
-                u1 = Uri.fromFile(outgoing);*/
-                i.putExtra(Intent.EXTRA_STREAM, Uri.parse("single_record.csv"));
-                //i.putExtra(Intent.EXTRA_STREAM, Uri.parse(file.toString()+"test_output"));
-                //i.putExtra(Intent.ACTION_GET_CONTENT, myDir.toString()+"/test_output");
-                //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // TEST THIS!!
-                //Uri uri = Uri.fromFile(new File(myDir.toString()+"/test_output"));
-                //i.putExtra(Intent.EXTRA_STREAM, uri);
+                // add single_record.csv and image
+                String[] filePaths = new String[] {"single_record.csv",
+                        Environment.getExternalStorageDirectory()+"/"+activityData.images};
+                ArrayList<Uri> uris = new ArrayList<Uri>();
+                for (String file : filePaths)
+                {
+                    File fileIn = new File(file);
+                    Uri u = Uri.fromFile(fileIn);
+                    uris.add(u);
+                }
+                i.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
                 startActivity(i);
-
-
-
-
             }
         });
 
