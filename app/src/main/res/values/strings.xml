@@ -92,12 +92,15 @@
     <string name="image_path">Enter path to image:</string>
 
     <string name="reset">Reset Form</string>
+    <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
 
+    <string name="latitude_label">Latitude: </string>
+    <string name="longitude_label">Longitude: </string>
 
-
-
-
-
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
+    <string name="title_activity_google_play_gps">GooglePlayGPSActivity</string>
     
     
 

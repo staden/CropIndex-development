@@ -3,6 +3,9 @@ package org.mtri.navdraw;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.location.Location;
+//import android.location.LocationListener;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,6 +17,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationRequest;
+import android.os.Handler;
+import android.provider.Settings;
+import android.net.ConnectivityManager;
 
 /**
  *
@@ -27,18 +39,28 @@ import android.widget.Toast;
  *  This class also inflates and updates objects displayed in fragment1_layout.xml
  *
  */
-public class fragment1 extends android.support.v4.app.Fragment implements View.OnClickListener{
+public class fragment1 extends android.support.v4.app.Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     // get layout objects
     private TextView displayOwner;
     private TextView displayDate;
     private TextView displayLocation;
 
-    // get GPS Tracker for refresh button
-    private GPSTracker gps;
+    /**
+     * Represents a geographical location.
+     */
+    protected Location mLastLocation;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    private LocationRequest mLocationRequest;
 
     // make a view for the fragment
     View rootview;
+
+    double latitude;
+    double longitude;
 
     @Nullable
     @Override
@@ -155,43 +177,174 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
             }
         });
 
-
-        // Tie show_location button to GPSTracker and activityData
         Button btnShowLocation = (Button) rootview.findViewById(R.id.show_location);
 
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                gps = new GPSTracker(getActivity());
 
-                if (gps.canGetLocation()) {
-                    double latitude = gps.getLatitude();
-                    double longitude = gps.getLongitude();
+                CheckEnableGPS();
 
-                    activityData.latitude = latitude;
-                    activityData.longitude = longitude;
+                /*
+                Toast.makeText(
+                        getActivity().getApplicationContext(),
+                        "Wait 10 Seconds to Refresh Location Again", Toast.LENGTH_LONG).show();
+                */
+                activityData.latitude = latitude;
+                activityData.longitude = longitude;
 
-                    displayLocation.setText(new StringBuilder()
-                            .append("Latitude: ").append(activityData.latitude)
-                            .append(", Longitude: ").append(activityData.longitude).append(" "));
+                /*
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        doStuff();
+                    }
+                }, 10000);
+                */
 
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            "Your Location is -\nLat: " + latitude + "\nLong: "
-                                    + longitude, Toast.LENGTH_LONG).show();
-                } else {
-                    gps.showSettingsAlert();
-                }
+                displayLocation.setText(new StringBuilder()
+                        .append("Latitude: ").append(activityData.latitude)
+                        .append(", Longitude: ").append(activityData.longitude).append(" "));
+
+                Toast.makeText(
+                        getActivity().getApplicationContext(),
+                        "Your Location is -\nLat: " + latitude + "\nLong: "
+                                + longitude, Toast.LENGTH_LONG).show();
             }
         });
 
         return rootview;
     }
+
+    private void CheckEnableGPS(){
+        String provider = Settings.Secure.getString(getActivity().getContentResolver(),
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+        if(provider.contains("gps")){
+            Toast.makeText(this.getActivity(), "GPS Enabled",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            //GPS Enabled
+            Toast.makeText(this.getActivity(), "GPS Disabled, the location is not accurate, check to see if you have the GPS enabled",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
     }
-}
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        buildGoogleApiClient();
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    private Handler mHandler = new Handler();
+    @Override
+    public void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+        Toast.makeText(
+                this.getActivity(),
+                "Wait 10 Seconds to Refresh Location", Toast.LENGTH_LONG).show();
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                this.getActivity().getSystemService(this.getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            //GPS Enabled
+            Toast.makeText(this.getActivity(), "Network Enabled",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            //GPS Enabled
+            Toast.makeText(this.getActivity(), "Network Disabled",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
+                doStuff();
+            }
+        }, 10000);
+    }
+
+    private void doStuff() {
+        Toast.makeText(this.getActivity(), "Ok, you may refresh your location!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        /*
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            latitude = Double.parseDouble(String.valueOf(mLastLocation.getLatitude()));
+            longitude = Double.parseDouble(String.valueOf(mLastLocation.getLongitude()));
+        } else {
+            Toast.makeText(this.getActivity(), R.string.no_location_detected, Toast.LENGTH_LONG).show();
+        }
+        */
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(1000);
+        startLocationUpdates();
+    }
+
+    protected void startLocationUpdates() {
+       LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        Toast.makeText(
+                this.getActivity(),
+                "Connection to Google Play Services Failed", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //stopLocationUpdates();
+    }
+    /*
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
+    */
+    @Override
+    public void onResume(){
+        super.onResume();
+        //startLocationUpdates();
+    }
+}
 
