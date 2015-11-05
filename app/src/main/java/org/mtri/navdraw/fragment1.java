@@ -2,6 +2,7 @@ package org.mtri.navdraw;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;
 //import android.location.LocationListener;
@@ -217,15 +218,15 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     }
 
     private void CheckEnableGPS(){
-        String provider = Settings.Secure.getString(getActivity().getContentResolver(),
+        String provider = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(),
                 Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 
         if(provider.contains("gps")){
-            Toast.makeText(this.getActivity(), "GPS Enabled",
+            Toast.makeText(this.getActivity().getApplicationContext(), "GPS Enabled",
                     Toast.LENGTH_LONG).show();
         }else{
             //GPS Enabled
-            Toast.makeText(this.getActivity(), "GPS Disabled, the location is not accurate, check to see if you have the GPS enabled",
+            Toast.makeText(this.getActivity().getApplicationContext(), "GPS Disabled, the location is not accurate, check to see if you have the GPS enabled",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -243,7 +244,7 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(this.getActivity().getApplicationContext())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -256,19 +257,20 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
         super.onStart();
         mGoogleApiClient.connect();
         Toast.makeText(
-                this.getActivity(),
+                this.getActivity().getApplicationContext(),
                 "Wait 10 Seconds to Refresh Location", Toast.LENGTH_LONG).show();
 
+        this.getActivity().getApplicationContext();
         ConnectivityManager connMgr = (ConnectivityManager)
-                this.getActivity().getSystemService(this.getActivity().CONNECTIVITY_SERVICE);
+                this.getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             //GPS Enabled
-            Toast.makeText(this.getActivity(), "Network Enabled",
+            Toast.makeText(this.getActivity().getApplicationContext(), "Network Enabled",
                     Toast.LENGTH_LONG).show();
         } else {
             //GPS Enabled
-            Toast.makeText(this.getActivity(), "Network Disabled",
+            Toast.makeText(this.getActivity().getApplicationContext(), "Network Disabled",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -280,7 +282,7 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     }
 
     private void doStuff() {
-        Toast.makeText(this.getActivity(), "Ok, you may refresh your location!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getActivity().getApplicationContext(), "Ok, you may refresh your location!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -314,7 +316,7 @@ public class fragment1 extends android.support.v4.app.Fragment implements View.O
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         Toast.makeText(
-                this.getActivity(),
+                this.getActivity().getApplicationContext(),
                 "Connection to Google Play Services Failed", Toast.LENGTH_LONG).show();
     }
 

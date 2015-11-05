@@ -1,14 +1,31 @@
 package org.mtri.navdraw;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.text.Layout;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +35,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.PopupWindow;
 /**
  * Created by sam on 3/23/15.
  *
@@ -26,12 +49,26 @@ import java.util.ArrayList;
  *  and provides options for how to submit.
  *
  */
-public class fragment7 extends android.support.v4.app.Fragment {
+
+public class fragment7 extends android.support.v4.app.Fragment implements service_reciever.Receiver {
 
     View rootview;
+    private service_reciever mReceiver;
+    private TextView email;
+    private View view;
+    ViewGroup parent;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mReceiver = new service_reciever(new Handler());
+        mReceiver.setReceiver(this);
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.popup, null);
+    }
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
         rootview = inflater.inflate(R.layout.fragment7_layout, container, false);
 
         // get activityData
@@ -73,7 +110,7 @@ public class fragment7 extends android.support.v4.app.Fragment {
         TextView excellent = (TextView) rootview.findViewById(R.id.submit_c1_excellent);
         TextView good = (TextView) rootview.findViewById(R.id.submit_c1_good);
         TextView fair = (TextView) rootview.findViewById(R.id.submit_c1_fair);
-        TextView poor = (TextView) rootview.findViewById(R.id.submit_c1_poor);
+        final TextView poor = (TextView) rootview.findViewById(R.id.submit_c1_poor);
         TextView vpoor = (TextView) rootview.findViewById(R.id.submit_c1_vpoor);
         TextView humus = (TextView) rootview.findViewById(R.id.submit_humus);
         TextView surplus = (TextView) rootview.findViewById(R.id.submit_surplus);
@@ -106,13 +143,38 @@ public class fragment7 extends android.support.v4.app.Fragment {
         images.setText(String.valueOf(activityData.images));
         notes.setText(String.valueOf(activityData.notes));
 
+        boolean network;
+
+        /*
+        ConnectivityManager connMgr = (ConnectivityManager)
+                this.getActivity().getSystemService(this.getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            //GPS Enabled
+            Toast.makeText(this.getActivity(), "Network Enabled, test 3.",
+                    Toast.LENGTH_LONG).show();
+            network = true;
+        } else {
+            //GPS Enabled
+            Toast.makeText(this.getActivity(), "Network Disabled, test 2",
+                    Toast.LENGTH_LONG).show();
+            network = false;
+        }
+        */
+
+        email = (TextView) rootview.findViewById(R.id.email);
+
         // configure button to save data as CSV to SD card
         Button btnLocalData = (Button) rootview.findViewById(R.id.local_storage_button);
         btnLocalData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //onCreateDialog();
+                //popup();
                 onSelected();
             }
+
             public void onSelected() {
 
                 // save data to EXTERNAL STORAGE
@@ -144,6 +206,9 @@ public class fragment7 extends android.support.v4.app.Fragment {
                     e.printStackTrace();
                 }
 
+                Intent intent = new Intent(getActivity(), submit.class);
+                intent.putExtra("reciever", mReceiver);
+                getActivity().startService(intent);
             }
         });
 
@@ -201,10 +266,29 @@ public class fragment7 extends android.support.v4.app.Fragment {
                 startActivity(i);
             }
         });
-
-
-
         return rootview;
     }
 
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        if (resultCode == 1){
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(getActivity())
+                            .setSmallIcon(R.drawable.cropindex_logo_small)
+                            .setContentTitle("Data connection avaiable")
+                            .setContentText("Click on the notification to email your data!");
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification notification = mBuilder.build();
+            notification.defaults|= Notification.DEFAULT_SOUND;
+            notification.defaults|= Notification.DEFAULT_LIGHTS;
+            notification.defaults|= Notification.DEFAULT_VIBRATE;
+            mNotificationManager.notify(1, notification);
+
+        }
+    }
 }
